@@ -52,9 +52,11 @@ ROBOTSTXT_OBEY = True
 
 # Enable or disable downloader middlewares
 # See http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
-#DOWNLOADER_MIDDLEWARES = {
-#    'souhunews.middlewares.MyCustomDownloaderMiddleware': 543,
-#}
+DOWNLOADER_MIDDLEWARES = {
+   # 'souhunews.middlewares.MyCustomDownloaderMiddleware': 543,
+    'souhunews.middlewares.selectSpiderMiddleware':540
+}
+
 
 # Enable or disable extensions
 # See http://scrapy.readthedocs.org/en/latest/topics/extensions.html
@@ -64,9 +66,9 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See http://scrapy.readthedocs.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'souhunews.pipelines.SouhunewsPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   'souhunews.pipelines.SouhunewsPipeline': 300,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See http://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +90,6 @@ ROBOTSTXT_OBEY = True
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+LOG_FILE='souhunews.txt'
+LOG_LEVEL='WARNING'

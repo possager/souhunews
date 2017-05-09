@@ -6,6 +6,8 @@
 # http://doc.scrapy.org/en/latest/topics/spider-middleware.html
 
 from scrapy import signals
+import time
+from scrapy.exceptions import IgnoreRequest
 
 
 class SouhunewsSpiderMiddleware(object):
@@ -54,3 +56,16 @@ class SouhunewsSpiderMiddleware(object):
 
     def spider_opened(self, spider):
         spider.logger.info('Spider opened: %s' % spider.name)
+
+
+class selectSpiderMiddleware(object):
+    def process_request(self,request,spider):
+        if 'https://api.m.sohu.com/autonews' in request.url:
+            time.sleep(1)
+            request.callback=spider.parse
+        elif 'https://m.sohu.com/n/' in request.url:
+            request.callback=spider.parse2
+        elif 'https://m.sohu.com/reply/api/comment/list/cursor' in request.url:
+            request.callback=spider.parse3
+        else:
+            raise IgnoreRequest(request.url)
